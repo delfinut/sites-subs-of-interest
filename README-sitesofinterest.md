@@ -1,5 +1,4 @@
-# Readme is written. Read me. 
-
+#Extract sites of interest from aasubs.py output 
 
 Script name:    
 sitesofinterest.py
