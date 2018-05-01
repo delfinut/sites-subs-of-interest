@@ -1,0 +1,118 @@
+---
+title: "multiple_reg_da"
+author: "DV"
+date: "21 June 2017"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r}
+
+#setwd("~/Dropbox (Cambridge University)/Projects/Swine/Swine_molevol/6_table3HKU/subs")
+predata = read.csv("./sitesofinterest_inout/H3eq/table3_H3eq2_notnor.csv")
+
+#predata2 = read.csv("table3_H3eq2_notnor.csv")
+
+
+data = as.data.frame(predata [,-1,drop=FALSE])
+
+View(data)
+
+head(data)
+print(colnames(data))
+
+plot(ag_dist, H3_127)
+plot(ag_dist, H3_145)
+plot(ag_dist, other_residues)
+plot(ag_dist, H3_193)
+
+fit193 <-  lm(ag_dist ~ H3_193)
+plot(fitted(fit193), residuals(fit193))
+
+res193 <- residuals(fit193)
+
+qqnorm(res193)
+qqline(res193)
+
+rm(predata)
+rm(predata2)
+
+attach(data)
+
+reg=lm(ag_dist~., data = data)
+summary(reg)
+
+anova(reg)
+reg2=lm(ag_dist~.^2, data = data)
+summary(reg2)
+
+#intercept is the mean of the baseline - what number of changes?? 
+
+summary(lm(ag_dist~H3_127, data = data))
+summary(lm(ag_dist~H3_145, data = data))
+summary(lm(ag_dist~H3_155, data = data))
+summary(lm(ag_dist~H3_156, data = data))
+summary(lm(ag_dist~H3_158, data = data))
+summary(lm(ag_dist~H3_159, data = data))
+summary(lm(ag_dist~H3_163, data = data))
+summary(lm(ag_dist~H3_189, data = data))
+summary(lm(ag_dist~H3_193, data = data))
+summary(lm(ag_dist~other_residues, data = data))
+
+par(mfrow=c(3,3))
+plot(H3_127, ag_dist, pch=20, cex=1)
+abline(lm(ag_dist~H3_127, data = data))
+plot(H3_145, ag_dist, pch=20, cex=1)
+abline(lm(ag_dist~H3_145, data = data))
+plot(H3_155, ag_dist, pch=20, cex=1)
+abline(lm(ag_dist~H3_155, data = data))
+plot(H3_156, ag_dist, pch=20, cex=1)
+abline(lm(ag_dist~H3_156, data = data))
+plot(H3_158, ag_dist, pch=20, cex=1)
+abline(lm(ag_dist~H3_158, data = data))
+plot(H3_159, ag_dist, pch=20, cex=1)
+abline(lm(ag_dist~H3_159, data = data))
+plot(H3_163, ag_dist, pch=20, cex=1)
+abline(lm(ag_dist~H3_163, data = data))
+plot(H3_189, ag_dist, pch=20, cex=1)
+abline(lm(ag_dist~H3_189, data = data))
+plot(H3_193, ag_dist, pch=20, cex=1)
+abline(lm(ag_dist~H3_193, data = data))
+plot(other_residues, ag_dist, pch=20, cex=1)
+abline(lm(ag_dist~other_residues, data = data))
+
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r}
+#fit193 <-  lm(ag_dist ~ H3_193)
+#plot(fitted(fit193), residuals(fit193))
+
+#res193 <- residuals(fit193)
+
+reg=lm(ag_dist~., data = data)
+resreg <-  residuals(reg)
+
+
+qqnorm(resreg)
+qqline(resreg)
+
+
+
+#qqnorm(res193)
+#qqline(res193)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
