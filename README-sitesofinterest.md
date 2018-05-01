@@ -1,7 +1,5 @@
 # Readme is written. Read me. 
 
-#Hmm I'm not sure this make sense to you but this might be better than going through this verbally! 
-
 
 Script name:    
 sitesofinterest.py
