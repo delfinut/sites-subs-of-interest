@@ -1,4 +1,4 @@
-# OK how does this look? More details? 
+# Pair-wise substitutions from an alignment
 
 Script name:  
 aasubs.py
